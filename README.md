@@ -17,7 +17,7 @@ Maven archetype used :
 
 [source,shell]
 ----
-mvn archetype:generate -DarchetypeGroupId=org.glassfish.jersey.archetypes -DarchetypeArtifactId=jersey-quickstart-webapp -DarchetypeVersion=1.0.0 -DgroupId=br.nom.penha.bruno.exemplo.jaxrs -DartifactId=exemplo-jaxrs-jersey -B
+mvn archetype:generate -DarchetypeGroupId=org.glassfish.jersey.archetypes -DarchetypeArtifactId=jersey-quickstart-webapp -DarchetypeVersion=2.27 -DgroupId=br.nom.penha.bruno.exemplo.jaxrs -DartifactId=exemplo-jaxrs-jersey -B
 ----
 
 == Executando
@@ -31,6 +31,24 @@ mvn jetty:run
 
 [ATENÇÃO]
 Jetty 9 requer Java 8 !
+
+=== Em caso de falha no plugin...
+
+Caso receba o erro:
+
+[source,shell]
+----
+[ERROR] No plugin found for prefix 'jetty' in the current project and in the plugin groups
+----
+
+Inclua no seu arquivo settings.xml o repositório abaixo, pois o Jetty não fica mais no Maven Central:
+
+[source,xml]
+----
+  <pluginGroups>
+    <pluginGroup>org.mortbay.jetty</pluginGroup>
+  </pluginGroups>
+----
 
 == REST com JAX-RS
 
@@ -87,18 +105,18 @@ docker build -t exemplo-jaxrs-jersey .
 
 [source,shell]
 ----
-docker run -d –name jaxrs-test-1 -p 8090:8080 exemplo-jaxrs-jersey
+docker run -d –name jaxrs-teste-1 -p 8090:8080 exemplo-jaxrs-jersey
 ----
 
 === Testes
 
-Abra um navegador e acesse http://localhost:8090/exemplo-sample-jersey/[http://localhost:8090/exemplo-jersey/]
+Abra um navegador e acesse http://localhost:8090/exemplo-jaxrs-jersey/[http://localhost:8090/exemplo-jaxrs-jersey/]
 
 Ou tente :
 
 [source,shell]
 ----
-curl -X GET http://localhost:8090/exemplo-jaxrs-jersey/webapi/meus-servicos[http://localhost:8090/exemplo-jaxrs-jersey/webapi/meus-servicos]
+curl -X GET http://localhost:8090/exemplo-jaxrs-jersey/webapi/myresource[http://localhost:8090/exemplo-jaxrs-jersey/webapi/myresource]
 ----
 
 _Gerado com Asciidoctor {asciidoctor-version}_
